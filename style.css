@@ -21,24 +21,23 @@ main{
 }
 
 .form-div, .list-div{
-    width: 20px;
-
-padding: 20px;
-    background-color: aliceblue;
+    display: inline-block;
+    padding: 20px;
+    background-color: rgb(135, 140, 145);
 }
 
 
 .list-div{
     float: right;
-    margin-left: 20px;
+    margin: 30px;
 
-    width:  40px;
+
 
 }
 
 .form-div{
-    margin-right: 20px;
     float: left;
+    margin: 30px;
 }
 
 th,td{
@@ -56,5 +55,28 @@ th{
 
 table{
     margin: auto;
-    width: 100%;
+}
+
+#wishList-form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#itemName , #itemCategory,#quantity{
+    border: aqua solid;
+}
+
+label{
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+}
+
+#submitBtn{
+    margin-top: 20px;
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
 }

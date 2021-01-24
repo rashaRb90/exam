@@ -1,12 +1,14 @@
 var ourForm= document.getElementById('wishList-form')
 var ourParentTable=document.getElementById('all-whishlist')
 var headerContentArr=['Item Name','Quantity','Category','price']
+var total= document.getElementById('total')
 var whishlistArray=[]
 
 function Whishlist(name,category,quantity){
     this.name=name;
     this.category=category;
     this.quantity=quantity;
+    this.price=generateRandom(quantity);
 
     whishlistArray.push(this);
 }
@@ -25,7 +27,7 @@ Whishlist.prototype.renderItem=function(){
     itemQuantityId.textContent=this.quantity;
 
     var itemPriceId=document.createElement('td')
-    itemPriceId.textContent=''
+    itemPriceId.textContent=this.price;
 
     wishlistRow.appendChild(itemNameId)
     wishlistRow.appendChild(itemCategoryId)
@@ -71,7 +73,7 @@ function renderlist(){
         itemQuantityId.textContent=whishlistArray[index].quantity;
     
         var itemPriceId=document.createElement('td')
-        itemPriceId.textContent=''
+        itemPriceId.textContent=whishlistArray[index].price;
     
         wishlistRow.appendChild(itemNameId)
         wishlistRow.appendChild(itemCategoryId)
@@ -80,8 +82,49 @@ function renderlist(){
     
         ourParentTable.appendChild(wishlistRow)
         
-    }
+    
+    var deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'x';
+    wishlistRow.appendChild(deleteBtn);
+
+    deleteBtn.addEventListener('click', deleteTask);
+    function deleteTask(){
+
+        itemNameId.innerHTML = '';
+        itemCategoryId.innerHTML = '';
+        itemQuantityId.innerHTML = '';
+
+
+        localStorage.removeItem('wishlistitems');
+
+
+
+
 }
+    }
+
+    total.textContent= ' the total is =' , generateRandom();
+
+    
+
+   
+}
+
+function generateRandom(quantity){
+
+    return (Math.floor(Math.random()*(1000-500))+500) * quantity
+
+}
+
+function calculateTotal(){
+    var total=0;
+    for (let index = 0; index < whishlistArray.length; index++) {
+        total=total+whishlistArray[index].price;
+        
+    }
+    return total;
+}
+
 
 
 
@@ -97,6 +140,7 @@ function handelFormSubmissions (event){
     newItems.renderItem();
 
     localStorage.setItem('wishlistitems',JSON.stringify(whishlistArray));
+    
 
 
 
@@ -112,5 +156,5 @@ function checkList(){
 
 renderHeader()
 ourForm.addEventListener('submit',handelFormSubmissions)
-checkList()
+checkList();
 
