@@ -1,1 +1,61 @@
 
+body{
+    background-image: url();
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.header-paragraph{
+    background-color: aliceblue;
+    text-align: center;
+    font-size: 40px;
+    padding: 5px;
+
+    margin-bottom: 40px;
+}
+
+main{
+    width: 100%;
+    display: inline-block;
+}
+
+.form-div, .list-div{
+    float: left;
+    width: 20px;
+
+padding: 20px;
+    background-color: aliceblue;
+}
+
+
+.list-div{
+    float: right;
+    margin-left: 20px;
+
+    width:  40px;
+
+}
+
+.form-div{
+    margin-right: 20px;
+    float: left;
+}
+
+th,td{
+    border: 4px darkgoldenrod solid;
+    padding: 5px;
+}
+
+th{
+    text-align: center;
+}
+
+#total{
+    text-align: center;
+}
+
+table{
+    margin: auto;
+    width: 100%;
+}
