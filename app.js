@@ -1,5 +1,5 @@
-var ourForm= document.getElementById('wishLis-form')
-var ourParentTable=document.getElementById('whishList-table')
+var ourForm= document.getElementById('wishList-form')
+var ourParentTable=document.getElementById('all-whishlist')
 var headerContentArr=['Item Name','Quantity','Category','price']
 var whishlistArray=[]
 
@@ -27,12 +27,21 @@ Whishlist.prototype.renderItem=function(){
     var itemPriceId=document.createElement('td')
     itemPriceId.textContent=''
 
+    wishlistRow.appendChild(itemNameId)
+    wishlistRow.appendChild(itemCategoryId)
+    wishlistRow.appendChild(itemQuantityId)
+    wishlistRow.appendChild(itemPriceId)
+
+    ourParentTable.appendChild(wishlistRow)
+
+    
+
     
 
 
 }
 
-function renderHeade(){
+function renderHeader(){
 
     var headerRow= document.createElement('tr')
     var th;
@@ -47,6 +56,33 @@ function renderHeade(){
 
 }
 
+function renderlist(){
+    for (let index = 0; index < whishlistArray.length; index++) {
+        var wishlistRow= document.createElement('tr');
+
+
+        var itemNameId= document.createElement('td');
+        itemNameId.textContent=whishlistArray[index].name;
+    
+        var itemCategoryId=document.createElement('td')
+        itemCategoryId.textContent=whishlistArray[index].category;
+    
+        var itemQuantityId= document.createElement('td')
+        itemQuantityId.textContent=whishlistArray[index].quantity;
+    
+        var itemPriceId=document.createElement('td')
+        itemPriceId.textContent=''
+    
+        wishlistRow.appendChild(itemNameId)
+        wishlistRow.appendChild(itemCategoryId)
+        wishlistRow.appendChild(itemQuantityId)
+        wishlistRow.appendChild(itemPriceId)
+    
+        ourParentTable.appendChild(wishlistRow)
+        
+    }
+}
+
 
 
 function handelFormSubmissions (event){
@@ -56,10 +92,25 @@ function handelFormSubmissions (event){
     var itemCategory = event.target.itemCategory.value;
     var itemQuantity = event.target.itemQuantity.value;
 
-    var newItems = new Whishlist[itemName,itemCategory,itemQuantity]
+    var newItems = new Whishlist(itemName,itemCategory,itemQuantity)
+
+    newItems.renderItem();
+
+    localStorage.setItem('wishlistitems',JSON.stringify(whishlistArray));
 
 
 
 
 }
-document.addEventListener('submit',handelFormSubmissions)
+
+function checkList(){
+    if (localStorage.getItem('wishlistitems')){
+        whishlistArray=JSON.parse(localStorage.getItem('wishlistitems'))
+        renderlist();
+    }
+}
+
+renderHeader()
+ourForm.addEventListener('submit',handelFormSubmissions)
+checkList()
+

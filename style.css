@@ -6,7 +6,7 @@ body{
 }
 
 
-.header-paragraph{
+header{
     background-color: aliceblue;
     text-align: center;
     font-size: 40px;
@@ -21,7 +21,6 @@ main{
 }
 
 .form-div, .list-div{
-    float: left;
     width: 20px;
 
 padding: 20px;
