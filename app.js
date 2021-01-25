@@ -1,6 +1,6 @@
 var ourForm= document.getElementById('wishList-form')
 var ourParentTable=document.getElementById('all-whishlist')
-var headerContentArr=['Item Name','Quantity','Category','price']
+var headerContentArr=['Item Name','Category','Quantity','price']
 var total= document.getElementById('total')
 var whishlistArray=[]
 
@@ -36,9 +36,28 @@ Whishlist.prototype.renderItem=function(){
 
     ourParentTable.appendChild(wishlistRow)
 
-    
+    total.textContent= ' the total is =' , generateRandom();
+
+    var deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'x';
+    wishlistRow.appendChild(deleteBtn);
+
+    deleteBtn.addEventListener('click', deleteTask);
+    function deleteTask(){
+
+        itemNameId.innerHTML = '';
+        itemCategoryId.innerHTML = '';
+        itemQuantityId.innerHTML = '';
+        itemPriceId.innerHTML= '';
+
+
+
+        localStorage.removeItem('wishlistitems');
+
 
     
+
+    }
 
 
 }
@@ -81,34 +100,47 @@ function renderlist(){
         wishlistRow.appendChild(itemPriceId)
     
         ourParentTable.appendChild(wishlistRow)
+
+        total.textContent= ' the total is =' , generateRandom();
+
+        var deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'x';
+        wishlistRow.appendChild(deleteBtn);
+    
+        deleteBtn.addEventListener('click', deleteTask);
+        function deleteTask(){
+
+            for (let index = 0; index < whishlistArray.length; index++) {
+
+                whishlistArray[index].name.innerHTML = '';
+                whishlistArray[index].category.innerHTML = '';
+                whishlistArray[index].quantity.innerHTML = '';
+                whishlistArray[index].price.innerHTML = '';
+
+                localStorage.removeItem('wishlistitems');
+
+                
+            }
+    
+            
+    
+    
+    
+
         
     
-    var deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'x';
-    wishlistRow.appendChild(deleteBtn);
-
-    deleteBtn.addEventListener('click', deleteTask);
-    function deleteTask(){
-
-        itemNameId.innerHTML = '';
-        itemCategoryId.innerHTML = '';
-        itemQuantityId.innerHTML = '';
-
-
-        localStorage.removeItem('wishlistitems');
-
-
-
-
-}
-    }
-
-    total.textContent= ' the total is =' , generateRandom();
-
     
+    }
+}
 
    
+
+
+
+
 }
+
+
 
 function generateRandom(quantity){
 
@@ -153,6 +185,8 @@ function checkList(){
         renderlist();
     }
 }
+
+
 
 renderHeader()
 ourForm.addEventListener('submit',handelFormSubmissions)
